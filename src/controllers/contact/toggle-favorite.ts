@@ -2,11 +2,15 @@ import { isValidObjectId } from "mongoose";
 import type { Response } from "express";
 import type { IAuthRequest, IContact } from "../../@types";
 import { ContactModel, UserModel } from "../../models";
-import { isEmpty } from "../../resources";
+import { checkPayloadFields, isEmpty } from "../../resources";
 
-export async function getById(request: IAuthRequest, response: Response) {
+export async function toggleFavorite(
+  request: IAuthRequest,
+  response: Response
+) {
   const { user: decodedUser } = request;
   const params = request.params;
+  const payload = request.body;
   let contacts: IContact[] = [];
 
   try {
@@ -19,6 +23,8 @@ export async function getById(request: IAuthRequest, response: Response) {
       return response.status(404).json({ message: "user not found" });
 
     contacts = user!.contacts as IContact[];
+
+    checkPayloadFields(payload, ["favorite"]);
   } catch (error: Error | any) {
     return response.status(400).json({ message: error.message });
   }
@@ -28,14 +34,11 @@ export async function getById(request: IAuthRequest, response: Response) {
     if (isEmpty(contact))
       return response.status(404).json({ message: "contact not found" });
 
-    let seen = contact!.seen;
-    seen += 1;
+    await ContactModel.findByIdAndUpdate(contact!._id, {
+      favorite: payload.favorite,
+    });
 
-    await ContactModel.findByIdAndUpdate(contact!._id, { seen });
-
-    return response
-      .status(200)
-      .json({ message: "ok", count: 1, data: contact });
+    return response.status(200).json({ message: "ok", count: 1 });
   } catch (error: Error | any) {
     return response.status(500).json({ message: error.message });
   }
