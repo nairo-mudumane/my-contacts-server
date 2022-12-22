@@ -8,7 +8,7 @@ export interface IContact extends IMongooseData {
   phone: number;
   favorite: boolean;
   seen: number;
-  avatar: string;
+  avatar?: string;
 }
 
 export interface INewContact {

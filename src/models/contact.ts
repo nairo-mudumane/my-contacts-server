@@ -32,6 +32,7 @@ const ContactSchema = new Schema<IContact>(
       type: Boolean,
       default: false,
     },
+    avatar: String,
   },
   { timestamps: true }
 );
