@@ -8,10 +8,6 @@ const UserSchema = new Schema<IUser>(
       required: true,
       unique: true,
     },
-    phone: {
-      type: Number,
-      required: true,
-    },
     firstname: {
       type: String,
       required: true,
@@ -24,14 +20,18 @@ const UserSchema = new Schema<IUser>(
       type: String,
       required: true,
     },
-    favorite: {
-      type: Boolean,
-      default: false,
-    },
-    seen: {
-      type: Number,
-      default: 0,
-    },
+    favorites: [
+      {
+        ref: "contacts",
+        type: Schema.Types.ObjectId,
+      },
+    ],
+    contacts: [
+      {
+        ref: "contacts",
+        type: Schema.Types.ObjectId,
+      },
+    ],
     avatar: String,
   },
   { timestamps: true }
