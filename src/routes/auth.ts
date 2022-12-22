@@ -1,8 +1,9 @@
 import { Router } from "express";
-import * as userController from "../controllers/user";
+import * as controller from "../controllers/auth";
 
 const router = Router();
 
-router.post("/new", userController.create);
+router.post("/new", controller.create);
+router.post("/login", controller.login);
 
 export { router as AuthRoutes };
