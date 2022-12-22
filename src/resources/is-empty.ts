@@ -30,6 +30,8 @@ export function isObjectEmpty(obj: { [key: string]: any }): boolean {
 }
 
 export function isEmpty(value: unknown): boolean {
+  if (value === undefined || value === null) return true;
+
   if (typeof value === "string" && isNaN(value as unknown as number))
     return isStringEmpty(value);
 

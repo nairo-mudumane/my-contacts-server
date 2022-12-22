@@ -17,6 +17,7 @@ export interface INewUser {
   lastname?: string;
   email?: string;
   avatar?: string;
+  token?: string;
 }
 
 export interface INewUserFormatted extends INewUser {
@@ -24,4 +25,8 @@ export interface INewUserFormatted extends INewUser {
   favorites: ObjectId[] | IContact[];
   contacts: ObjectId[] | IContact[];
   avatar?: string;
+}
+
+export interface IAuthCredentials {
+  email?: string;
 }
