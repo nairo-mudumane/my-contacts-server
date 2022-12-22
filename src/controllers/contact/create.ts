@@ -33,17 +33,19 @@ export async function create(request: IAuthRequest, response: Response) {
         throw new Error("contact already exists");
     });
   } catch (error: Error | any) {
-    if (file) await removeFile(file.path);
+    if (!isEmpty(file)) await removeFile(file!.path);
     return response.status(400).json({ message: error.message });
   }
 
   try {
-    const upload = new CloudUpload();
-    avatar = await upload.single({
-      destination: "users",
-      filename: file!.filename,
-      filepath: file!.path,
-    });
+    if (!isEmpty(file)) {
+      const upload = new CloudUpload();
+      avatar = await upload.single({
+        destination: "users",
+        filename: file!.filename,
+        filepath: file!.path,
+      });
+    }
 
     const formatted = formatContact(payload);
     const created = await ContactModel.create({ ...formatted, avatar });
@@ -61,7 +63,7 @@ export async function create(request: IAuthRequest, response: Response) {
       },
     });
   } catch (error: Error | any) {
-    if (file) await removeFile(file.path);
+    if (!isEmpty(file)) await removeFile(file!.path);
     return response.status(500).json({ message: error.message });
   }
 }

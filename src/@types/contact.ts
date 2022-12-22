@@ -3,6 +3,7 @@ import type { IMongooseData } from "./mongoose";
 export interface IContact extends IMongooseData {
   firstname: string;
   lastname: string;
+  fullname: string;
   email: string;
   phone: number;
   favorite: boolean;

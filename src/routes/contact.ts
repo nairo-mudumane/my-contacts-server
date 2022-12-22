@@ -7,5 +7,6 @@ const router = Router();
 router.use(authUser);
 router.post("/", localUpload.single("avatar"), controller.create);
 router.get("/", controller.getAll);
+router.get("/:id", controller.getById);
 
 export { router as ContactRoutes };

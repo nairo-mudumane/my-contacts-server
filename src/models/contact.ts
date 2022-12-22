@@ -16,6 +16,10 @@ const ContactSchema = new Schema<IContact>(
       type: String,
       required: true,
     },
+    fullname: {
+      type: String,
+      required: true,
+    },
     phone: {
       type: Number,
       required: true,
