@@ -1,6 +1,6 @@
 import type { Response, NextFunction } from "express";
 import type { IAuthRequest, IDecodedUser } from "../@types";
-import { verifyLoginToken } from "../resources";
+import { isEmpty, verifyLoginToken } from "../resources";
 
 export function authUser(
   request: IAuthRequest,

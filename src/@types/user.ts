@@ -8,7 +8,6 @@ export interface IUser extends IMongooseData {
   fullname: string;
   email: string;
   avatar: string;
-  favorites: ObjectId[] | IContact[];
   contacts: ObjectId[] | IContact[];
 }
 
@@ -22,7 +21,6 @@ export interface INewUser {
 
 export interface INewUserFormatted extends INewUser {
   fullname: string;
-  favorites: ObjectId[] | IContact[];
   contacts: ObjectId[] | IContact[];
   avatar?: string;
 }

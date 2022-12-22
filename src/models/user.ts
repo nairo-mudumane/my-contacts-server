@@ -20,12 +20,6 @@ const UserSchema = new Schema<IUser>(
       type: String,
       required: true,
     },
-    favorites: [
-      {
-        ref: "contacts",
-        type: Schema.Types.ObjectId,
-      },
-    ],
     contacts: [
       {
         ref: "contacts",

@@ -17,14 +17,14 @@ export async function login(request: Request, response: Response) {
   }
 
   try {
-    const user = await UserModel.findOne({ email: payload!.email }).then(
-      (result) => {
+    const user = await UserModel.findOne({ email: payload!.email })
+      .populate({ path: "contacts", options: { sort: { fullname: 1 } } })
+      .then((result) => {
         if (result)
           //  @ts-ignore
           return result._doc as IUser;
         return null;
-      }
-    );
+      });
 
     if (isEmpty(user))
       return response.status(404).json({ message: "user not found" });
