@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import { ObjectId } from "mongoose";
-import type { IAuthRequest } from "../@types";
+import type { IAuthRequest, IDecodedUser } from "../@types";
 import { verifyLoginToken } from "../resources";
 
 export function authUser(
@@ -30,7 +30,7 @@ export function authUser(
     verifyLoginToken(token, (err, decoded) => {
       if (err) throw err;
 
-      const { _id } = decoded as { _id: ObjectId };
+      const { _id } = decoded as IDecodedUser;
       request["user"] = { _id };
     });
     return next();
