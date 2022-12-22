@@ -1,5 +1,4 @@
 import type { IMongooseData } from "./mongoose";
-import type { ObjectId } from "mongoose";
 
 export interface IContact extends IMongooseData {
   firstname: string;
@@ -9,4 +8,16 @@ export interface IContact extends IMongooseData {
   favorite: boolean;
   seen: number;
   avatar: string;
+}
+
+export interface INewContact {
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  phone?: number;
+}
+
+export interface INewContactFormatted extends INewContact {
+  fullname: string;
+  avatar?: string;
 }

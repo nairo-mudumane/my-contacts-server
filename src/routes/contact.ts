@@ -1,10 +1,10 @@
 import { Router } from "express";
 import * as controller from "../controllers/contact";
-import { authUser } from "../middlewares";
+import { authUser, localUpload } from "../middlewares";
 
 const router = Router();
 
 router.use(authUser);
-router.post("/", controller.create);
+router.post("/", localUpload.single("avatar"), controller.create);
 
 export { router as ContactRoutes };

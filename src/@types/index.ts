@@ -3,3 +3,4 @@ export * from "./mongoose";
 export * from "./user";
 export * from "./express";
 export * from "./auth";
+export * from "./media-storage";
