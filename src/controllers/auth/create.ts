@@ -14,7 +14,7 @@ export async function create(request: Request, response: Response) {
   try {
     checkPayloadFields(payload, ["firstname", "lastname", "email"]);
 
-    let exists = UserModel.findOne({ email: payload.email });
+    let exists = await UserModel.findOne({ email: payload.email });
     if (isEmpty(exists)) throw new Error("email already exists");
   } catch (error: Error | any) {
     return response.status(400).json({ message: error.message });
