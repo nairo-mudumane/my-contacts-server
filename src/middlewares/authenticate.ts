@@ -1,5 +1,4 @@
-import type { Request, Response, NextFunction } from "express";
-import { ObjectId } from "mongoose";
+import type { Response, NextFunction } from "express";
 import type { IAuthRequest, IDecodedUser } from "../@types";
 import { verifyLoginToken } from "../resources";
 
