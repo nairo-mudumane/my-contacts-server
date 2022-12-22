@@ -1,5 +1,6 @@
-import type { Request, Response } from "express";
+import type { Response } from "express";
+import { IAuthRequest } from "../../@types";
 
-export async function create(request: Request, response: Response) {
-  return response.json({ ok: true });
+export async function create(request: IAuthRequest, response: Response) {
+  return response.json({ "request.user": request.user });
 }
