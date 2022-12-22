@@ -26,7 +26,3 @@ export interface INewUserFormatted extends INewUser {
   contacts: ObjectId[] | IContact[];
   avatar?: string;
 }
-
-export interface IAuthCredentials {
-  email?: string;
-}
